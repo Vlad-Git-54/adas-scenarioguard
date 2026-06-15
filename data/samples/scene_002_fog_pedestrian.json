@@ -1,0 +1,10 @@
+{
+  "id": "scene_002_fog_pedestrian",
+  "weather": "fog",
+  "visibility_m": 32,
+  "ego_speed_kmh": 38,
+  "ground_truth_critical_scene": true,
+  "objects": [
+    {"id": "ped_01", "class": "pedestrian", "distance_m": 18, "relative_lane": "front", "occlusion": 0.25, "camera_conf": 0.42, "lidar_conf": 0.72, "radar_conf": 0.58}
+  ]
+}

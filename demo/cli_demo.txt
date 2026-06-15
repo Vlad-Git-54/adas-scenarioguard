@@ -1,0 +1,12 @@
+$ python -m adas_scenarioguard.cli data/samples/scene_002_fog_pedestrian.json --pretty
+Scene: scene_002_fog_pedestrian
+Weather: fog, visibility: 32.0 m
+Status: CRITICAL, max risk: 1.0
+- ped_01: pedestrian, dist=18.0 m, risk=1.0, conf=0.608, uncertainty=0.515, critical=True
+  reason: уязвимый участник движения, объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность
+
+$ python scripts/evaluate_examples.py
+precision = 0.857
+recall    = 1.000
+f1        = 0.923
+examples  = 10

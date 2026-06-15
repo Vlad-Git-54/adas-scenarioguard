@@ -1,0 +1,10 @@
+{
+  "id": "scene_008_heavy_rain_near_car",
+  "weather": "heavy_rain",
+  "visibility_m": 30,
+  "ego_speed_kmh": 55,
+  "ground_truth_critical_scene": true,
+  "objects": [
+    {"id": "car_03", "class": "car", "distance_m": 18, "relative_lane": "front", "occlusion": 0.18, "camera_conf": 0.36, "lidar_conf": 0.66, "radar_conf": 0.86}
+  ]
+}

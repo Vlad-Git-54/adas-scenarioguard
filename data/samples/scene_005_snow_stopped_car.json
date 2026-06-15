@@ -1,0 +1,10 @@
+{
+  "id": "scene_005_snow_stopped_car",
+  "weather": "snow",
+  "visibility_m": 28,
+  "ego_speed_kmh": 50,
+  "ground_truth_critical_scene": true,
+  "objects": [
+    {"id": "car_02", "class": "car", "distance_m": 13, "relative_lane": "front", "occlusion": 0.20, "camera_conf": 0.38, "lidar_conf": 0.70, "radar_conf": 0.82}
+  ]
+}

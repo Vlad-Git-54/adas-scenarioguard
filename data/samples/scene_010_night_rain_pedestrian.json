@@ -1,0 +1,10 @@
+{
+  "id": "scene_010_night_rain_pedestrian",
+  "weather": "night_rain",
+  "visibility_m": 22,
+  "ego_speed_kmh": 28,
+  "ground_truth_critical_scene": true,
+  "objects": [
+    {"id": "ped_04", "class": "pedestrian", "distance_m": 21, "relative_lane": "front", "occlusion": 0.45, "camera_conf": 0.24, "lidar_conf": 0.61, "radar_conf": 0.54}
+  ]
+}

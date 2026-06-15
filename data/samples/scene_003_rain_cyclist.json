@@ -1,0 +1,10 @@
+{
+  "id": "scene_003_rain_cyclist",
+  "weather": "rain",
+  "visibility_m": 48,
+  "ego_speed_kmh": 42,
+  "ground_truth_critical_scene": true,
+  "objects": [
+    {"id": "cyc_01", "class": "cyclist", "distance_m": 24, "relative_lane": "front", "occlusion": 0.10, "camera_conf": 0.51, "lidar_conf": 0.69, "radar_conf": 0.61}
+  ]
+}

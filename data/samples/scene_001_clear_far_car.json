@@ -1,0 +1,10 @@
+{
+  "id": "scene_001_clear_far_car",
+  "weather": "clear",
+  "visibility_m": 90,
+  "ego_speed_kmh": 45,
+  "ground_truth_critical_scene": false,
+  "objects": [
+    {"id": "car_01", "class": "car", "distance_m": 62, "relative_lane": "front", "occlusion": 0.0, "camera_conf": 0.88, "lidar_conf": 0.84, "radar_conf": 0.79}
+  ]
+}

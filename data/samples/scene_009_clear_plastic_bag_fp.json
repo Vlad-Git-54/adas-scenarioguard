@@ -1,0 +1,10 @@
+{
+  "id": "scene_009_clear_plastic_bag_fp",
+  "weather": "clear",
+  "visibility_m": 85,
+  "ego_speed_kmh": 20,
+  "ground_truth_critical_scene": false,
+  "objects": [
+    {"id": "obs_02", "class": "unknown", "distance_m": 14, "relative_lane": "front", "occlusion": 0.10, "camera_conf": 0.48, "lidar_conf": 0.41, "radar_conf": 0.25}
+  ]
+}

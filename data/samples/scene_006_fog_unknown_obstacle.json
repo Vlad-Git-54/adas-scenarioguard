@@ -1,0 +1,10 @@
+{
+  "id": "scene_006_fog_unknown_obstacle",
+  "weather": "fog",
+  "visibility_m": 25,
+  "ego_speed_kmh": 35,
+  "ground_truth_critical_scene": true,
+  "objects": [
+    {"id": "obs_01", "class": "unknown", "distance_m": 11, "relative_lane": "front", "occlusion": 0.35, "camera_conf": 0.28, "lidar_conf": 0.59, "radar_conf": 0.46}
+  ]
+}

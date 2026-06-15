@@ -1,0 +1,10 @@
+{
+  "id": "scene_007_clear_side_pedestrian",
+  "weather": "clear",
+  "visibility_m": 95,
+  "ego_speed_kmh": 30,
+  "ground_truth_critical_scene": false,
+  "objects": [
+    {"id": "ped_03", "class": "pedestrian", "distance_m": 37, "relative_lane": "side", "occlusion": 0.05, "camera_conf": 0.82, "lidar_conf": 0.80, "radar_conf": 0.30}
+  ]
+}

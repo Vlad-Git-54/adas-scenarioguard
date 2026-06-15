@@ -1,0 +1,19 @@
+{
+  "id": "string",
+  "weather": "clear | rain | heavy_rain | fog | snow | night | night_rain",
+  "visibility_m": "number",
+  "ego_speed_kmh": "number",
+  "ground_truth_critical_scene": "boolean, only for evaluation examples",
+  "objects": [
+    {
+      "id": "string",
+      "class": "pedestrian | cyclist | car | truck | unknown | ...",
+      "distance_m": "number",
+      "relative_lane": "front | adjacent | side | far",
+      "occlusion": "number from 0 to 1",
+      "camera_conf": "number from 0 to 1 or null",
+      "lidar_conf": "number from 0 to 1 or null",
+      "radar_conf": "number from 0 to 1 or null"
+    }
+  ]
+}

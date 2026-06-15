@@ -1,0 +1,12 @@
+metric,value
+note,"Metrics are calculated on 10 control JSON scenarios. This is an MVP check, not a full benchmark on nuScenes or DENSE."
+num_examples,10
+tp,6
+fp,1
+fn,0
+tn,3
+precision,0.857
+recall,1.0
+f1,0.923
+fps_json_pipeline,3179.3
+avg_ms_per_scene,0.3145

@@ -1,0 +1,10 @@
+{
+  "id": "scene_004_night_adjacent_pedestrian",
+  "weather": "night",
+  "visibility_m": 55,
+  "ego_speed_kmh": 25,
+  "ground_truth_critical_scene": false,
+  "objects": [
+    {"id": "ped_02", "class": "pedestrian", "distance_m": 44, "relative_lane": "adjacent", "occlusion": 0.15, "camera_conf": 0.63, "lidar_conf": 0.67, "radar_conf": 0.35}
+  ]
+}

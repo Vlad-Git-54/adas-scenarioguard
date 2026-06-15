@@ -1,0 +1,272 @@
+[
+  {
+    "scene_id": "scene_001_clear_far_car",
+    "weather": "clear",
+    "y_true": false,
+    "y_pred": false,
+    "max_risk_score": 0.551,
+    "result": {
+      "scene_id": "scene_001_clear_far_car",
+      "weather": "clear",
+      "visibility_m": 90.0,
+      "objects": [
+        {
+          "object_id": "car_01",
+          "label": "car",
+          "distance_m": 62.0,
+          "lane": "front",
+          "fused_confidence": 0.84,
+          "uncertainty": 0.193,
+          "risk_score": 0.551,
+          "is_critical": false,
+          "reason": "объект находится впереди"
+        }
+      ],
+      "scene_is_critical": false,
+      "max_risk_score": 0.551
+    }
+  },
+  {
+    "scene_id": "scene_002_fog_pedestrian",
+    "weather": "fog",
+    "y_true": true,
+    "y_pred": true,
+    "max_risk_score": 1.0,
+    "result": {
+      "scene_id": "scene_002_fog_pedestrian",
+      "weather": "fog",
+      "visibility_m": 32.0,
+      "objects": [
+        {
+          "object_id": "ped_01",
+          "label": "pedestrian",
+          "distance_m": 18.0,
+          "lane": "front",
+          "fused_confidence": 0.608,
+          "uncertainty": 0.515,
+          "risk_score": 1.0,
+          "is_critical": true,
+          "reason": "уязвимый участник движения, объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 1.0
+    }
+  },
+  {
+    "scene_id": "scene_003_rain_cyclist",
+    "weather": "rain",
+    "y_true": true,
+    "y_pred": true,
+    "max_risk_score": 0.997,
+    "result": {
+      "scene_id": "scene_003_rain_cyclist",
+      "weather": "rain",
+      "visibility_m": 48.0,
+      "objects": [
+        {
+          "object_id": "cyc_01",
+          "label": "cyclist",
+          "distance_m": 24.0,
+          "lane": "front",
+          "fused_confidence": 0.617,
+          "uncertainty": 0.489,
+          "risk_score": 0.997,
+          "is_critical": true,
+          "reason": "уязвимый участник движения, объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 0.997
+    }
+  },
+  {
+    "scene_id": "scene_004_night_adjacent_pedestrian",
+    "weather": "night",
+    "y_true": false,
+    "y_pred": false,
+    "max_risk_score": 0.704,
+    "result": {
+      "scene_id": "scene_004_night_adjacent_pedestrian",
+      "weather": "night",
+      "visibility_m": 55.0,
+      "objects": [
+        {
+          "object_id": "ped_02",
+          "label": "pedestrian",
+          "distance_m": 44.0,
+          "lane": "adjacent",
+          "fused_confidence": 0.545,
+          "uncertainty": 0.524,
+          "risk_score": 0.704,
+          "is_critical": false,
+          "reason": "уязвимый участник движения, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": false,
+      "max_risk_score": 0.704
+    }
+  },
+  {
+    "scene_id": "scene_005_snow_stopped_car",
+    "weather": "snow",
+    "y_true": true,
+    "y_pred": true,
+    "max_risk_score": 0.896,
+    "result": {
+      "scene_id": "scene_005_snow_stopped_car",
+      "weather": "snow",
+      "visibility_m": 28.0,
+      "objects": [
+        {
+          "object_id": "car_02",
+          "label": "car",
+          "distance_m": 13.0,
+          "lane": "front",
+          "fused_confidence": 0.725,
+          "uncertainty": 0.42,
+          "risk_score": 0.896,
+          "is_critical": true,
+          "reason": "объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 0.896
+    }
+  },
+  {
+    "scene_id": "scene_006_fog_unknown_obstacle",
+    "weather": "fog",
+    "y_true": true,
+    "y_pred": true,
+    "max_risk_score": 1.0,
+    "result": {
+      "scene_id": "scene_006_fog_unknown_obstacle",
+      "weather": "fog",
+      "visibility_m": 25.0,
+      "objects": [
+        {
+          "object_id": "obs_01",
+          "label": "unknown",
+          "distance_m": 11.0,
+          "lane": "front",
+          "fused_confidence": 0.488,
+          "uncertainty": 0.637,
+          "risk_score": 1.0,
+          "is_critical": true,
+          "reason": "объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 1.0
+    }
+  },
+  {
+    "scene_id": "scene_007_clear_side_pedestrian",
+    "weather": "clear",
+    "y_true": false,
+    "y_pred": false,
+    "max_risk_score": 0.66,
+    "result": {
+      "scene_id": "scene_007_clear_side_pedestrian",
+      "weather": "clear",
+      "visibility_m": 95.0,
+      "objects": [
+        {
+          "object_id": "ped_03",
+          "label": "pedestrian",
+          "distance_m": 37.0,
+          "lane": "side",
+          "fused_confidence": 0.657,
+          "uncertainty": 0.447,
+          "risk_score": 0.66,
+          "is_critical": false,
+          "reason": "уязвимый участник движения, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": false,
+      "max_risk_score": 0.66
+    }
+  },
+  {
+    "scene_id": "scene_008_heavy_rain_near_car",
+    "weather": "heavy_rain",
+    "y_true": true,
+    "y_pred": true,
+    "max_risk_score": 0.87,
+    "result": {
+      "scene_id": "scene_008_heavy_rain_near_car",
+      "weather": "heavy_rain",
+      "visibility_m": 30.0,
+      "objects": [
+        {
+          "object_id": "car_03",
+          "label": "car",
+          "distance_m": 18.0,
+          "lane": "front",
+          "fused_confidence": 0.725,
+          "uncertainty": 0.426,
+          "risk_score": 0.87,
+          "is_critical": true,
+          "reason": "объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 0.87
+    }
+  },
+  {
+    "scene_id": "scene_009_clear_plastic_bag_fp",
+    "weather": "clear",
+    "y_true": false,
+    "y_pred": true,
+    "max_risk_score": 0.96,
+    "result": {
+      "scene_id": "scene_009_clear_plastic_bag_fp",
+      "weather": "clear",
+      "visibility_m": 85.0,
+      "objects": [
+        {
+          "object_id": "obs_02",
+          "label": "unknown",
+          "distance_m": 14.0,
+          "lane": "front",
+          "fused_confidence": 0.386,
+          "uncertainty": 0.668,
+          "risk_score": 0.96,
+          "is_critical": true,
+          "reason": "объект находится впереди, малая дистанция, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 0.96
+    }
+  },
+  {
+    "scene_id": "scene_010_night_rain_pedestrian",
+    "weather": "night_rain",
+    "y_true": true,
+    "y_pred": true,
+    "max_risk_score": 1.0,
+    "result": {
+      "scene_id": "scene_010_night_rain_pedestrian",
+      "weather": "night_rain",
+      "visibility_m": 22.0,
+      "objects": [
+        {
+          "object_id": "ped_04",
+          "label": "pedestrian",
+          "distance_m": 21.0,
+          "lane": "front",
+          "fused_confidence": 0.545,
+          "uncertainty": 0.591,
+          "risk_score": 1.0,
+          "is_critical": true,
+          "reason": "уязвимый участник движения, объект находится впереди, малая дистанция, сложные погодные условия, повышенная неопределенность"
+        }
+      ],
+      "scene_is_critical": true,
+      "max_risk_score": 1.0
+    }
+  }
+]
