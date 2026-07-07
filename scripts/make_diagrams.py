@@ -261,8 +261,8 @@ def deployment_diagram() -> None:
         ("Results", "metrics, figures, DOCX/PPTX", 8.05, 4.95, AMBER_SOFT, AMBER),
     ]
     future = [
-        ("RX 7700 XT", "доступный GPU-ресурс", 3.05, 1.65, PURPLE_SOFT, PURPLE),
-        ("DirectML / ROCm path", "зависит от выбранного backend", 5.55, 1.65, PURPLE_SOFT, PURPLE),
+        ("Backend choice", "отдельная проверка стека", 3.05, 1.65, PURPLE_SOFT, PURPLE),
+        ("Training pipeline", "данные, версии, ресурсы", 5.55, 1.65, PURPLE_SOFT, PURPLE),
         ("Raw sensor model", "images, LiDAR, radar, stress tests", 8.05, 1.65, RED_SOFT, RED),
     ]
     for title, subtitle, x, y, fc, ec in current + future:
@@ -285,7 +285,7 @@ def deployment_diagram() -> None:
     ax.text(
         6,
         0.75,
-        "Текущий эксперимент не требует GPU: он проверяет scenario-level методику на CPU. GPU указан только как ресурс следующего этапа.",
+        "Текущий эксперимент проверяет scenario-level методику на CPU. Raw-sensor обучение вынесено в отдельный будущий контур.",
         ha="center",
         va="center",
         fontsize=10,
