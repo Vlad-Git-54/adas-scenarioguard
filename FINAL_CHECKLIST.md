@@ -1,30 +1,58 @@
 # FINAL CHECKLIST
 
-- [x] Репозиторий содержит README, CHANGELOG, LICENSE, requirements.txt, src, scripts, data, tests, results, figures, docs.
-- [x] Подготовка данных выполнена командой `python scripts/prepare_data.py`.
-- [x] Обучение выполнено командой `python scripts/train.py`.
-- [x] Оценка выполнена командой `python scripts/evaluate.py`.
-- [x] Графики и диаграммы сгенерированы.
-- [x] `results/metrics.json` обновлен.
-- [x] Primary model: proposed_reliability_logreg, precision=0.885, recall=0.937, F1=0.911.
-- [x] Основной эксперимент обучен на реальных аннотациях KITTI Object Detection; derived target описан отдельно.
-- [x] Структура ВКР содержит титульный лист, задание, аннотацию, оглавление, термины, введение, 3 главы, заключение, литературу и приложения.
-- [x] Оглавление содержит фактические разделы работы и номера страниц.
-- [x] Оформление ВКР задано в генераторе: A4, поля 30/10/20/20 мм, Times New Roman 12, полуторный интервал, абзац 12,5 мм.
-- [x] ВКР DOCX собрана.
-- [x] ВКР PDF собрана и открывается.
-- [x] Задание на ВКР DOCX собрано.
-- [x] Задание на ВКР PDF собрано и открывается.
-- [x] Предметный указатель компетенций DOCX собран.
-- [x] Предметный указатель компетенций PDF собран и открывается.
-- [x] Презентация защиты PPTX собрана.
-- [x] Презентация защиты PDF собрана и открывается.
-- [x] Презентация защиты стилизована под университетский шаблон и содержит заметки докладчика.
-- [x] Проверка презентации на выход объектов за пределы слайда выполнена.
-- [x] PDF ВКР и PDF презентации отрендерены в PNG для визуальной проверки.
-- [x] Преподавательская проверка готовности сохранена в `docs/teacher_review.md`.
-- [x] Локальная проверка оригинальности и самоповторов сохранена в `docs/originality_report.md`.
-- [x] README содержит команды запуска.
-- [x] Тесты пройдены: 4 passed.
-- [ ] Подписи и даты в официальных формах заполнить вручную.
-- [ ] Точную должность и степень руководителя заполнить вручную.
+Дата финальной проверки: 2026-07-07
+
+- [x] Ветка работы: `final-vkr-rebuild`.
+- [x] Итоговые имена файлов не используют лишние служебные названия.
+- [x] Подготовка данных выполнена: `scripts/prepare_data.py`.
+- [x] Обучение выполнено заново: `scripts/train.py`.
+- [x] Оценка выполнена заново: `scripts/evaluate.py`.
+- [x] Графики пересобраны: `scripts/make_figures.py`.
+- [x] Диаграммы пересобраны: `scripts/make_diagrams.py`.
+- [x] Добавлен экспорт отчетных файлов: `scripts/export_report_assets.py`.
+- [x] Добавлена проверка стиля: `scripts/check_text_style.py`.
+- [x] Добавлена сверка результатов: `scripts/check_results_consistency.py`.
+- [x] Создан `AUDIT_REPORT.md`.
+- [x] Создан `DATA_DECISION.md`.
+- [x] Создан `RESULTS_CONSISTENCY.md`.
+- [x] Создан `PDF_VISUAL_CHECK.md`.
+- [x] Обновлен `docs/originality_report.md`.
+- [x] Основной эксперимент обучен на реальных аннотациях KITTI Object Detection.
+- [x] Синтетические данные не используются для обучения и расчета метрик.
+- [x] Ограничение по derived target описано отдельно: KITTI не содержит исходной метки `critical_scene`.
+- [x] `results/model_comparison.csv` создан.
+- [x] `results/feature_list.json` создан.
+- [x] `results/threshold_selection.md` создан.
+- [x] `results/confusion_matrix.csv` обновлен.
+- [x] `results/error_cases.csv` обновлен.
+- [x] `results/run_summary.md` обновлен.
+- [x] Primary model: `proposed_reliability_logreg`.
+- [x] Test split: 1497 сцен.
+- [x] Precision: 0.885.
+- [x] Recall: 0.937.
+- [x] F1: 0.911.
+- [x] Accuracy: 0.933.
+- [x] ROC AUC: 0.981.
+- [x] PR AUC: 0.97.
+- [x] Confusion matrix: TP=509, FP=66, FN=34, TN=888.
+- [x] Отчет собран: `Marianovskiy_VKR_ADAS_final_rebuild.docx`.
+- [x] Отчет PDF собран: `Marianovskiy_VKR_ADAS_final_rebuild.pdf`.
+- [x] Презентация собрана: `Marianovskiy_VKR_ADAS_defense_final_rebuild.pptx`.
+- [x] Презентация PDF собрана: `Marianovskiy_VKR_ADAS_defense_final_rebuild.pdf`.
+- [x] Задание собрано: `Marianovskiy_zadanie_na_VKR_final_rebuild.docx`.
+- [x] Задание PDF собрано: `Marianovskiy_zadanie_na_VKR_final_rebuild.pdf`.
+- [x] Предметный указатель собран: `Marianovskiy_competency_index_final_rebuild.docx`.
+- [x] Предметный указатель PDF собран: `Marianovskiy_competency_index_final_rebuild.pdf`.
+- [x] Черновик отзыва руководителя создан: `Marianovskiy_teacher_review_draft.docx`.
+- [x] Черновик заявления ГИА ДОТ создан: `Marianovskiy_GIA_DOT_statement_draft.docx`.
+- [x] Титульный лист отчета визуально проверен.
+- [x] Задание в отчете оформлено как служебный лист, не как обычная таблица.
+- [x] Компетенции ограничены перечнем УК, ОПК, ПК-1 и ПК-2.
+- [x] Локальная оценка оригинальности: 94.68%.
+- [x] `check_text_style.py` прошел по отчету, презентации, заданию, указателю компетенций и черновикам.
+- [x] `check_results_consistency.py` прошел.
+- [x] `pytest` прошел: 4 passed.
+- [x] PDF отчета отрендерен в PNG для визуальной проверки.
+- [x] PDF презентации отрендерен в PNG для визуальной проверки.
+- [ ] Подписи, даты, должность и ученую степень руководителя заполнить вручную перед подачей.
+- [ ] Официальный процент оригинальности проверить в вузовской системе, локальная проверка не заменяет закрытый антиплагиат.

@@ -13,8 +13,8 @@ baseline_kitti_logreg,roc_auc,0.977
 baseline_kitti_logreg,pr_auc,0.961
 baseline_kitti_logreg,threshold,0.38
 baseline_kitti_logreg,num_examples,1497
-baseline_kitti_logreg,avg_ms_per_scene,0.00017
-baseline_kitti_logreg,fps_json_pipeline,5907654.3
+baseline_kitti_logreg,avg_ms_per_scene,0.00019
+baseline_kitti_logreg,fps_json_pipeline,5287885.2
 proposed_reliability_logreg,tp,509
 proposed_reliability_logreg,fp,66
 proposed_reliability_logreg,fn,34
@@ -29,8 +29,8 @@ proposed_reliability_logreg,roc_auc,0.981
 proposed_reliability_logreg,pr_auc,0.97
 proposed_reliability_logreg,threshold,0.35
 proposed_reliability_logreg,num_examples,1497
-proposed_reliability_logreg,avg_ms_per_scene,0.0002
-proposed_reliability_logreg,fps_json_pipeline,5095302.5
+proposed_reliability_logreg,avg_ms_per_scene,0.00019
+proposed_reliability_logreg,fps_json_pipeline,5369442.2
 ablation_without_3d_geometry,tp,472
 ablation_without_3d_geometry,fp,64
 ablation_without_3d_geometry,fn,71
@@ -46,4 +46,4 @@ ablation_without_3d_geometry,pr_auc,0.943
 ablation_without_3d_geometry,threshold,0.43
 ablation_without_3d_geometry,num_examples,1497
 ablation_without_3d_geometry,avg_ms_per_scene,0.00015
-ablation_without_3d_geometry,fps_json_pipeline,6522875.8
+ablation_without_3d_geometry,fps_json_pipeline,6662217.3

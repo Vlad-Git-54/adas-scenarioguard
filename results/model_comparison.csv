@@ -1,0 +1,4 @@
+model,threshold,precision,recall,f1,accuracy,false_positive_rate,false_negative_rate,roc_auc,pr_auc,tp,fp,fn,tn,num_examples,num_features
+baseline_kitti_logreg,0.38,0.876,0.913,0.894,0.922,0.073,0.087,0.977,0.961,496,70,47,884,1497,6
+proposed_reliability_logreg,0.35,0.885,0.937,0.911,0.933,0.069,0.063,0.981,0.97,509,66,34,888,1497,16
+ablation_without_3d_geometry,0.43,0.881,0.869,0.875,0.91,0.067,0.131,0.966,0.943,472,64,71,890,1497,9

@@ -5,7 +5,7 @@ import { Presentation, PresentationFile } from "@oai/artifact-tool";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const OUT = path.join(ROOT, "Marianovskiy_VKR_ADAS_defense_final.pptx");
+const OUT = path.join(ROOT, "Marianovskiy_VKR_ADAS_defense_final_rebuild.pptx");
 const QA_DIR = path.join(ROOT, "work", "presentation_qa");
 
 const metrics = JSON.parse(await fs.readFile(path.join(ROOT, "results", "metrics.json"), "utf8"));
