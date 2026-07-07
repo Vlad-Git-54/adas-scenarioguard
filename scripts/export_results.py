@@ -68,11 +68,10 @@ python -m pytest -q
 - `results/confusion_matrix.csv` - матрица ошибок
 - `results/error_cases.csv` - ошибки test split
 - `figures/` - графики и схемы
-- `Marianovskiy_VKR_ADAS_final.docx` / `.pdf` - финальный текст ВКР
-- `Marianovskiy_VKR_ADAS_defense_final.pptx` / `.pdf` - презентация защиты
-- `Marianovskiy_zadanie_na_VKR_final.docx` / `.pdf` - задание на ВКР
-- `Marianovskiy_competency_index_final.docx` / `.pdf` - предметный указатель компетенций
-- `FINAL_CHECKLIST.md` и `docs/teacher_review.md` - итоговая самопроверка
+- `submission/Marianovskiy_VKR_ADAS_final_submission.docx` / `.pdf` - финальный текст ВКР
+- `submission/Marianovskiy_VKR_ADAS_defense_final_submission.pptx` / `.pdf` - презентация защиты
+- `submission/Marianovskiy_zadanie_na_VKR_final_submission.docx` / `.pdf` - задание на ВКР
+- `submission/Marianovskiy_competency_index_final_submission.docx` / `.pdf` - предметный указатель компетенций
 
 ## Контрольные значения primary model
 

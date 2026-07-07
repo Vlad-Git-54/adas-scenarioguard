@@ -1,9 +1,0 @@
-{
-  "status": "passed",
-  "issues": [],
-  "originality": {
-    "word_count": 7974,
-    "local_originality_percent": 93.46,
-    "repeated_ngram_share": 0.0654
-  }
-}

@@ -5,7 +5,8 @@ import { Presentation, PresentationFile } from "@oai/artifact-tool";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const OUT = path.join(ROOT, "Marianovskiy_VKR_ADAS_defense_final_clean.pptx");
+const SUBMISSION = path.join(ROOT, "submission");
+const OUT = path.join(SUBMISSION, "Marianovskiy_VKR_ADAS_defense_final_submission.pptx");
 const QA_DIR = path.join(ROOT, "work", "presentation_qa");
 
 const metrics = JSON.parse(await fs.readFile(path.join(ROOT, "results", "metrics.json"), "utf8"));
@@ -367,6 +368,7 @@ for (const [index, slide] of deck.slides.items.entries()) {
 }
 await writeBlob(path.join(QA_DIR, "montage.webp"), await deck.export({ format: "webp", montage: true, scale: 1 }));
 
+await fs.mkdir(SUBMISSION, { recursive: true });
 const pptx = await PresentationFile.exportPptx(deck);
 await pptx.save(OUT);
 console.log(`Saved: ${OUT}`);
