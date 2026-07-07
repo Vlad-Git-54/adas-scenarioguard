@@ -5,7 +5,7 @@ import { Presentation, PresentationFile } from "@oai/artifact-tool";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const OUT = path.join(ROOT, "Marianovskiy_VKR_ADAS_defense_final_rebuild.pptx");
+const OUT = path.join(ROOT, "Marianovskiy_VKR_ADAS_defense_final_clean.pptx");
 const QA_DIR = path.join(ROOT, "work", "presentation_qa");
 
 const metrics = JSON.parse(await fs.readFile(path.join(ROOT, "results", "metrics.json"), "utf8"));
@@ -54,6 +54,10 @@ function addBox(slide, text, x, y, w, h, fill = "#f8fafc", line = "#cbd5e1", fon
   rect.text = text;
   rect.text.style = { fontSize, color: "#111827", alignment: "center", bold: true };
   return rect;
+}
+
+function addArrowText(slide, x, y, w = 36, h = 34, color = "#334155") {
+  addText(slide, "→", x, y, w, h, { fontSize: 28, bold: true, color, alignment: "center" });
 }
 
 function addBrandMark(slide, text, x, y, w, h, inverse = false) {
@@ -226,6 +230,7 @@ for (let i = 1; i <= 10; i++) {
   const slide = deck.slides.items[3];
   addTitle(slide, "Литература показывает, что деградация сенсоров измерима");
   await addImage(slide, "figures/bevfusion_literature_chart.png", 70, 150, 610, 430, "BEVFusion literature chart");
+  addText(slide, "По данным Kumar et al., 2025. Не является собственным экспериментом", 86, 585, 575, 28, { fontSize: 15, color: "#475569", alignment: "center" });
   addBulletList(slide, [
     "Corner cases требуют отдельного анализа вне средней точности",
     "Плохая погода влияет на сенсоры по-разному",
@@ -241,12 +246,22 @@ for (let i = 1; i <= 10; i++) {
 
 {
   const slide = deck.slides.items[4];
-  addTitle(slide, "Методика превращает сцену в признаки риска и надежности");
-  await addImage(slide, "figures/pipeline_diagram.png", 80, 145, 1080, 310, "Pipeline diagram");
-  addBox(slide, "camera quality proxy", 115, 505, 260, 72, "#eff6ff", "#2563eb", 22);
-  addBox(slide, "3D geometry quality", 410, 505, 260, 72, "#f0fdf4", "#16a34a", 22);
-  addBox(slide, "uncertainty proxy", 705, 505, 260, 72, "#fff7ed", "#ea580c", 22);
-  addBox(slide, "risk prior", 1000, 505, 160, 72, "#fef2f2", "#dc2626", 22);
+  addTitle(slide, "Методика связывает наблюдение, надежность и риск");
+  addBox(slide, "Входные наблюдения\nclass, bbox, 3D position,\nocclusion, truncation", 64, 166, 205, 130, "#eff6ff", "#2563eb", 19);
+  addArrowText(slide, 280, 214);
+  addBox(slide, "Признаки качества\ncamera proxy\ngeometry proxy", 330, 166, 190, 130, "#f0fdf4", "#16a34a", 19);
+  addArrowText(slide, 531, 214);
+  addBox(slide, "Reliability\nкачество наблюдения\nкак вход модели", 580, 166, 190, 130, "#ecfeff", "#0891b2", 19);
+  addArrowText(slide, 781, 214);
+  addBox(slide, "Uncertainty\n0,55 camera\n0,45 geometry", 830, 166, 175, 130, "#fff7ed", "#ea580c", 19);
+  addArrowText(slide, 1014, 214);
+  addBox(slide, "Risk score\nclass, distance,\nlateral, occlusion", 1055, 166, 165, 130, "#fef2f2", "#dc2626", 18);
+  addBox(slide, "Фиксированное правило critical_scene\nуязвимый участник впереди, близкий транспорт, сильная окклюзия или truncation", 95, 350, 430, 120, "#f8fafc", "#64748b", 20);
+  addBox(slide, "Logistic regression\nbaseline, proposed, ablation\nпорог выбирается на validation", 565, 350, 300, 120, "#f5f3ff", "#7c3aed", 20);
+  addBox(slide, "Итог\ncritical scene или OK\nошибки сохраняются", 905, 350, 245, 120, "#fff7ed", "#d97706", 20);
+  addArrowText(slide, 525, 392);
+  addArrowText(slide, 866, 392);
+  addText(slide, "Обучение и метрики строятся на реальных аннотациях KITTI. JSON demo не влияет на test split.", 135, 535, 1010, 36, { fontSize: 20, color: "#334155", alignment: "center" });
   addFooter(slide, 5);
   notes(slide, [
     "Пояснить, что признаки считаются из класса объекта, расстояния, lateral position, occlusion и truncation.",
@@ -256,14 +271,24 @@ for (let i = 1; i <= 10; i++) {
 
 {
   const slide = deck.slides.items[5];
-  addTitle(slide, "Архитектура разделяет данные, обучение и оценку");
-  await addImage(slide, "figures/component_diagram.png", 70, 145, 560, 390, "Component diagram");
-  await addImage(slide, "figures/deployment_diagram.png", 660, 145, 560, 390, "Deployment diagram");
-  addText(slide, "GPU RX7700XT указан как ресурс для будущего raw-sensor обучения. Текущий KITTI scenario-level эксперимент выполняется на CPU.", 150, 575, 980, 48, { fontSize: 20, color: "#334155", alignment: "center" });
+  addTitle(slide, "Архитектура разделяет подготовку, обучение и отчетность");
+  addBox(slide, "1\nprepare_data.py\nKITTI label_2", 72, 155, 180, 110, "#eff6ff", "#2563eb", 19);
+  addArrowText(slide, 260, 195);
+  addBox(slide, "2\nscenario table\nfeatures + split", 305, 155, 180, 110, "#f0fdf4", "#16a34a", 19);
+  addArrowText(slide, 494, 195);
+  addBox(slide, "3\ntrain.py\nmodel weights", 538, 155, 180, 110, "#f5f3ff", "#7c3aed", 19);
+  addArrowText(slide, 727, 195);
+  addBox(slide, "4\nevaluate.py\nmetrics + errors", 770, 155, 180, 110, "#fff7ed", "#d97706", 19);
+  addArrowText(slide, 959, 195);
+  addBox(slide, "5\nresults / figures\nJSON, PNG, CSV", 1002, 155, 180, 110, "#fef2f2", "#dc2626", 19);
+  addBox(slide, "Документы\nВКР, приложение, презентация\nберут числа из results/metrics.json", 125, 360, 305, 118, "#f8fafc", "#64748b", 20);
+  addBox(slide, "Проверки\nstyle, consistency, pytest\nотдельно фиксируют результат", 485, 360, 305, 118, "#ecfeff", "#0891b2", 20);
+  addBox(slide, "Граница эксперимента\nтекущая модель scenario-level\nraw sensor pipeline вынесен дальше", 845, 360, 305, 118, "#fff7ed", "#ea580c", 20);
+  addText(slide, "Архитектура оставляет проверяемый след: от исходной разметки до финальных PDF и графиков.", 125, 548, 980, 42, { fontSize: 22, color: "#334155", alignment: "center" });
   addFooter(slide, 6);
   notes(slide, [
     "Развести текущий воспроизводимый эксперимент и будущий более тяжелый raw sensor pipeline.",
-    "Показать, что результаты лежат в results, а рисунки в figures.",
+    "GPU RX7700XT можно назвать только как ресурс будущего этапа. Текущие метрики получены на табличной модели и не зависят от GPU.",
   ]);
 }
 
@@ -282,7 +307,7 @@ for (let i = 1; i <= 10; i++) {
   addFooter(slide, 7);
   notes(slide, [
     "Честно проговорить, что целевая метка derived, потому что KITTI не размечает ADAS criticality.",
-    "Это реальные аннотации дорожных сцен KITTI; целевая метка получена фиксированным правилом из наблюдаемых признаков.",
+    "Это реальные аннотации дорожных сцен KITTI. Целевая метка получена фиксированным правилом из наблюдаемых признаков.",
   ]);
 }
 
