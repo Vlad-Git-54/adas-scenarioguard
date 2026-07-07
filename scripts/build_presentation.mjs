@@ -61,54 +61,6 @@ function addArrowText(slide, x, y, w = 36, h = 34, color = "#334155") {
   addText(slide, "→", x, y, w, h, { fontSize: 28, bold: true, color, alignment: "center" });
 }
 
-function addBrandMark(slide, text, x, y, w, h, inverse = false) {
-  const mark = slide.shapes.add({
-    geometry: "roundRect",
-    position: { left: x, top: y, width: w, height: h },
-    fill: inverse ? "none" : TGU_BLUE,
-    line: { style: "solid", fill: inverse ? "#ffffff" : TGU_BLUE, width: 2 },
-    borderRadius: 6,
-  });
-  mark.text = text;
-  mark.text.style = {
-    fontSize: 15,
-    bold: true,
-    color: "#ffffff",
-    alignment: "center",
-  };
-}
-
-function addCoverChrome(slide) {
-  slide.shapes.add({
-    geometry: "roundRect",
-    position: { left: 32, top: 24, width: 1216, height: 648 },
-    fill: TGU_BLUE,
-    line: { style: "solid", fill: TGU_BLUE, width: 0 },
-    borderRadius: 28,
-  });
-  slide.shapes.add({
-    geometry: "roundRect",
-    position: { left: 910, top: 130, width: 210, height: 250 },
-    fill: "#3f49d4",
-    line: { style: "solid", fill: "#4f58df", width: 1 },
-    borderRadius: 18,
-  });
-  slide.shapes.add({
-    geometry: "roundRect",
-    position: { left: 955, top: 222, width: 122, height: 92 },
-    fill: "#f8fafc",
-    line: { style: "solid", fill: "#f8fafc", width: 0 },
-    borderRadius: 22,
-  });
-  addBrandMark(slide, "ТГУ", 82, 42, 92, 58, true);
-  addText(slide, "Томский\nгосударственный\nуниверситет", 184, 45, 190, 58, {
-    fontSize: 13,
-    bold: true,
-    color: "#ffffff",
-  });
-  addBrandMark(slide, "IDO", 408, 42, 92, 58, true);
-}
-
 function addSlideChrome(slide, n) {
   slide.shapes.add({
     geometry: "rect",
@@ -151,12 +103,12 @@ function addBulletList(slide, items, x, y, w, lineHeight = 42, fontSize = 22) {
   });
 }
 
-async function addImage(slide, relPath, x, y, w, h, alt) {
+async function addImage(slide, relPath, x, y, w, h, alt, options = {}) {
   slide.images.add({
     blob: await imageBytes(relPath),
     contentType: "image/png",
     alt,
-    fit: "contain",
+    fit: options.fit ?? "contain",
     position: { left: x, top: y, width: w, height: h },
   });
 }
@@ -171,24 +123,14 @@ const deck = Presentation.create({ slideSize: { width: 1280, height: 720 } });
 for (let i = 1; i <= 10; i++) {
   const slide = deck.slides.add();
   slide.background.fill = "#ffffff";
-  if (i === 1) {
-    addCoverChrome(slide);
-  } else {
+  if (i !== 1) {
     addSlideChrome(slide, i);
   }
 }
 
 {
   const slide = deck.slides.items[0];
-  addText(slide, "Разработка методов обнаружения и обработки редких и критических сценариев в мультимодальном восприятии систем ADAS", 76, 158, 770, 150, { fontSize: 34, bold: true, color: "#ffffff" });
-  addText(slide, "для повышения безопасности в сложных погодных и дорожных условиях", 76, 322, 760, 42, { fontSize: 24, color: "#dbeafe" });
-  addBox(slide, "Марьяновский Владислав Андреевич\nГруппа 292405-1\n09.04.03 Прикладная информатика", 76, 430, 500, 128, "#ffffff", "#ffffff", 21);
-  addBox(slide, "НИ ТГУ · Институт дистанционного образования\nПрофиль: компьютерное зрение и нейронные сети\nТомск · 2026", 630, 430, 520, 128, TGU_BLUE_SOFT, "#ffffff", 21);
-  addFooter(slide, 1);
-  notes(slide, [
-    "Начать с границы темы: работа не про полный автопилот, а про слой надежности восприятия ADAS.",
-    "Сказать, что итогом является воспроизводимый прототип, обученный на реальных KITTI-аннотациях.",
-  ]);
+  await addImage(slide, "figures/title_cover.png", 0, 0, 1280, 720, "Титульный слайд", { fit: "cover" });
 }
 
 {
