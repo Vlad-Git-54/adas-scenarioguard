@@ -1,91 +1,83 @@
 # ADAS ScenarioGuard
 
-Учебный open-source MVP для моей ВКР по теме обнаружения редких и критических сценариев в мультимодальном восприятии ADAS.
+ADAS ScenarioGuard - исследовательский прототип для обнаружения редких и критических сценариев в мультимодальном восприятии ADAS. Репозиторий подготовлен для ВКР по теме:
 
-Прототип получает описание дорожной сцены в JSON, объединяет оценки камеры, LiDAR и radar, считает неопределенность и выдает флаг критического сценария. Это не сертифицированная ADAS-система и не модуль управления автомобилем. Сейчас это минимальный рабочий прототип для проверки логики анализа риска.
+> Разработка методов обнаружения и обработки редких и критических сценариев в мультимодальном восприятии систем ADAS для повышения безопасности в сложных погодных и дорожных условиях
 
-## Что умеет MVP
+Прототип не управляет автомобилем и не является сертифицированной системой безопасности. Его задача - обучить и проверить scenario-level модель, которая по признакам дорожной сцены оценивает риск критического сценария.
 
-- принимает JSON-сцену с объектами и показаниями трех сенсоров;
-- считает надежность сенсоров с учетом погоды, видимости и окклюзии;
-- объединяет confidence камеры, LiDAR и radar;
-- оценивает uncertainty и risk score;
-- помечает сцену как `CRITICAL` или `OK`;
-- считает precision, recall, F1 и FPS на 10 контрольных примерах.
+## Что реализовано
 
-## Демонстрация
+- подготовка сценарной таблицы из реальных аннотаций KITTI Object Detection `label_2`
+- обучение baseline, proposed и ablation моделей logistic regression на NumPy
+- подбор порога на validation split
+- оценка на test split
+- расчет precision, recall, F1, accuracy, FNR, FPR, ROC AUC, PR AUC и FPS
+- экспорт confusion matrix, error cases, predictions и run summary
+- генерация графиков и диаграмм для ВКР
+- CLI demo на JSON-сцене с camera, LiDAR и radar confidence
 
-![CLI demo](demo/cli_demo.png)
+## Данные
 
-Пример запуска:
+Основной эксперимент использует реальные аннотации KITTI Object Detection:
 
-```bash
-python -m adas_scenarioguard.cli data/samples/scene_002_fog_pedestrian.json --pretty
-```
+- официальный бенчмарк: https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d
+- архив разметки: `data_object_label_2.zip`
+- размер таблицы после подготовки: 7481 сцена
 
-Пример результата:
-
-```text
-Scene: scene_002_fog_pedestrian
-Weather: fog, visibility: 32.0 m
-Status: CRITICAL, max risk: 1.0
-- ped_01: pedestrian, dist=18.0 m, risk=1.0, conf=0.608, uncertainty=0.515, critical=True
-```
+KITTI не содержит готовую метку `critical_scene`. Поэтому целевая переменная получена фиксированным правилом из реальных аннотаций: класс объекта, 3D-дистанция, боковое положение, occlusion и truncation. Это не оригинальная метка KITTI и не ручная экспертная разметка опасности.
 
 ## Установка
 
 ```bash
-git clone https://github.com/<username>/adas-scenarioguard.git
+git clone https://github.com/Vlad-Git-54/adas-scenarioguard.git
 cd adas-scenarioguard
 python -m venv .venv
-source .venv/bin/activate      # Linux/macOS
-# .venv\\Scripts\\activate     # Windows
-pip install -r requirements.txt
-pip install -e .
+.venv\Scripts\activate
+python -m pip install -r requirements.txt
+python -m pip install -e .
 ```
 
-## Запуск
-
-Анализ одной сцены:
+Linux и macOS:
 
 ```bash
-python -m adas_scenarioguard.cli data/samples/scene_002_fog_pedestrian.json --pretty
+source .venv/bin/activate
 ```
 
-Сохранение результата в JSON:
+## Полный цикл
 
 ```bash
-python -m adas_scenarioguard.cli data/samples/scene_002_fog_pedestrian.json \
-  --output results/example_output.json
+python scripts/prepare_data.py
+python scripts/train.py
+python scripts/evaluate.py
+python scripts/make_figures.py
+python scripts/make_diagrams.py
+python scripts/export_results.py
+python -m pytest -q
 ```
 
-Оценка на контрольных примерах:
+После запуска создаются:
 
-```bash
-python scripts/evaluate_examples.py
-```
-
-После запуска создаются файлы:
-
+- `data/processed/kitti_scenarios.csv`
+- `data/processed/kitti_split.json`
+- `results/models.json`
 - `results/metrics.json`
 - `results/metrics.csv`
+- `results/confusion_matrix.csv`
+- `results/error_cases.csv`
 - `results/predictions.json`
+- `results/run_summary.md`
+- `figures/*.png`
 
-## Контрольные метрики MVP
+## Модели
 
-Метрики ниже получены на 10 небольших JSON-сценах из папки `data/samples`. Это проверка работы прототипа, а не полноценный бенчмарк на nuScenes или DENSE.
+| Модель | Смысл |
+|---|---|
+| `baseline_kitti_logreg` | базовые признаки сцены: число объектов, дистанция, фронтальные и уязвимые объекты |
+| `proposed_reliability_logreg` | baseline + признаки окклюзии, усечения, proxy-качества камеры и 3D-геометрии, uncertainty и risk prior |
+| `ablation_without_3d_geometry` | ablation без ключевых 3D-геометрических признаков |
 
-| Метрика | Значение |
-|---|---:|
-| Precision | 0.857 |
-| Recall | 1.000 |
-| F1 | 0.923 |
-| TP / FP / FN / TN | 6 / 1 / 0 / 3 |
-| FPS JSON-pipeline | зависит от компьютера, обычно больше 1000 FPS |
-
-## Формат входных данных
-
-Пример входного JSON:
+## Пример входного JSON для CLI demo
 
 ```json
 {
@@ -108,46 +100,53 @@ python scripts/evaluate_examples.py
 }
 ```
 
-Схема описана в `data/schema/example_scene_schema.json`.
-
-## Используемые пакеты
-
-Основной код работает на стандартной библиотеке Python. Дополнительно используются:
-
-- `Pillow` для генерации demo-скриншота;
-- `pytest` для простых unit-тестов.
-
-Список зависимостей указан в `requirements.txt`.
-
-## Тесты
+Запуск demo:
 
 ```bash
-pytest
+python scripts/run_demo.py
 ```
 
-## Структура репозитория
+Прямой запуск CLI:
+
+```bash
+python -m adas_scenarioguard.cli data/samples/scene_002_fog_pedestrian.json --pretty
+```
+
+## Ограничения
+
+- KITTI не содержит radar, поэтому radar используется только в JSON demo, а не в основном KITTI-эксперименте.
+- KITTI не содержит готовую метку ADAS critical scene. Метка получена воспроизводимым правилом.
+- Модель работает на scenario-level признаках, а не на сырых изображениях и облаках точек.
+- Прототип не является сертифицированной системой безопасности.
+- Для реального автомобиля нужны испытания на raw sensor data, отказоустойчивость, сертификация и юридическая проверка.
+- Доступный GPU AMD Radeon RX 7700 XT может использоваться в следующем этапе для raw image/LiDAR моделей, но текущий табличный эксперимент выполняется на CPU.
+
+## Структура
 
 ```text
 adas-scenarioguard/
-├── src/adas_scenarioguard/      # код MVP
-├── data/samples/                # 10 контрольных сцен
-├── data/schema/                 # схема входного JSON
-├── scripts/                     # оценка и генерация demo
-├── results/                     # метрики и предсказания
-├── demo/                        # скриншот и вывод CLI
-├── docs/                        # краткое описание отчета и презентации
-├── tests/                       # unit-тесты
+├── src/adas_scenarioguard/
+├── scripts/
+├── data/samples/
+├── data/schema/
+├── data/processed/
+├── docs/
+├── figures/
+├── results/
+├── tests/
 ├── README.md
 ├── CHANGELOG.md
-├── requirements.txt
-└── LICENSE
+├── LICENSE
+└── requirements.txt
 ```
 
-## Ссылки на отчет и презентацию
+## Документы
 
-- Краткое описание отчета: `docs/report_summary.md`
-- Заметки к презентации: `docs/presentation_notes.md`
+- `docs/reproducibility.md` - команды повторения эксперимента
+- `docs/error_analysis.md` - анализ ошибок
+- `docs/defense_qna.md` - ответы на вопросы защиты
+- `results/run_summary.md` - краткая сводка последнего запуска
 
 ## Лицензия
 
-MIT License. См. файл `LICENSE`.
+MIT License. См. `LICENSE`.

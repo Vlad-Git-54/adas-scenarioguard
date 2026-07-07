@@ -1,13 +1,115 @@
 {
-  "note": "Metrics are calculated on 10 control JSON scenarios. This is an MVP check, not a full benchmark on nuScenes or DENSE.",
-  "num_examples": 10,
-  "tp": 6,
-  "fp": 1,
-  "fn": 0,
-  "tn": 3,
-  "precision": 0.857,
-  "recall": 1.0,
-  "f1": 0.923,
-  "fps_json_pipeline": 3179.3,
-  "avg_ms_per_scene": 0.3145
+  "dataset": "KITTI Object Detection training annotations",
+  "dataset_source": "https://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d",
+  "raw_label_archive": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_label_2.zip",
+  "target_note": "critical_scene is a deterministic label derived from real KITTI annotations. It is not an original KITTI benchmark target.",
+  "primary_model": "proposed_reliability_logreg",
+  "models": {
+    "baseline_kitti_logreg": {
+      "tp": 496,
+      "fp": 70,
+      "fn": 47,
+      "tn": 884,
+      "precision": 0.876,
+      "recall": 0.913,
+      "f1": 0.894,
+      "accuracy": 0.922,
+      "false_positive_rate": 0.073,
+      "false_negative_rate": 0.087,
+      "roc_auc": 0.977,
+      "pr_auc": 0.961,
+      "threshold": 0.38,
+      "num_examples": 1497,
+      "avg_ms_per_scene": 0.00018,
+      "fps_json_pipeline": 5408236.8
+    },
+    "proposed_reliability_logreg": {
+      "tp": 509,
+      "fp": 66,
+      "fn": 34,
+      "tn": 888,
+      "precision": 0.885,
+      "recall": 0.937,
+      "f1": 0.911,
+      "accuracy": 0.933,
+      "false_positive_rate": 0.069,
+      "false_negative_rate": 0.063,
+      "roc_auc": 0.981,
+      "pr_auc": 0.97,
+      "threshold": 0.35,
+      "num_examples": 1497,
+      "avg_ms_per_scene": 0.00016,
+      "fps_json_pipeline": 6359390.2
+    },
+    "ablation_without_3d_geometry": {
+      "tp": 472,
+      "fp": 64,
+      "fn": 71,
+      "tn": 890,
+      "precision": 0.881,
+      "recall": 0.869,
+      "f1": 0.875,
+      "accuracy": 0.91,
+      "false_positive_rate": 0.067,
+      "false_negative_rate": 0.131,
+      "roc_auc": 0.966,
+      "pr_auc": 0.943,
+      "threshold": 0.43,
+      "num_examples": 1497,
+      "avg_ms_per_scene": 9e-05,
+      "fps_json_pipeline": 11097110.7
+    }
+  },
+  "grouped_metrics": {
+    "close_objects": {
+      "num_examples": 1184,
+      "tp": 509,
+      "fp": 66,
+      "fn": 33,
+      "tn": 576,
+      "precision": 0.885,
+      "recall": 0.939,
+      "f1": 0.911
+    },
+    "vulnerable_road_users": {
+      "num_examples": 513,
+      "tp": 285,
+      "fp": 23,
+      "fn": 8,
+      "tn": 197,
+      "precision": 0.925,
+      "recall": 0.973,
+      "f1": 0.948
+    },
+    "occluded_objects": {
+      "num_examples": 774,
+      "tp": 323,
+      "fp": 39,
+      "fn": 26,
+      "tn": 386,
+      "precision": 0.892,
+      "recall": 0.926,
+      "f1": 0.909
+    },
+    "truncated_objects": {
+      "num_examples": 572,
+      "tp": 298,
+      "fp": 43,
+      "fn": 11,
+      "tn": 220,
+      "precision": 0.874,
+      "recall": 0.964,
+      "f1": 0.917
+    },
+    "vehicle_scenes": {
+      "num_examples": 1366,
+      "tp": 434,
+      "fp": 62,
+      "fn": 33,
+      "tn": 837,
+      "precision": 0.875,
+      "recall": 0.929,
+      "f1": 0.901
+    }
+  }
 }

@@ -1,0 +1,14 @@
+{
+  "dataset": "KITTI Object Detection training annotations",
+  "source_url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_label_2.zip",
+  "num_scenes": 7481,
+  "positive_critical_scenes": 2715,
+  "negative_scenes": 4766,
+  "split_counts": {
+    "train": 4488,
+    "validation": 1496,
+    "test": 1497
+  },
+  "seed": 54,
+  "label_note": "KITTI does not provide a critical_scene target. The target is derived by a fixed rule from real KITTI class, distance, lateral position, occlusion, and truncation annotations."
+}
