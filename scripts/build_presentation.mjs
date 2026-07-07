@@ -5,8 +5,8 @@ import { Presentation, PresentationFile } from "@oai/artifact-tool";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
-const SUBMISSION = path.join(ROOT, "submission");
-const OUT = path.join(SUBMISSION, "Marianovskiy_VKR_ADAS_defense_final_submission.pptx");
+const FINAL = path.join(ROOT, "final");
+const OUT = path.join(FINAL, "Marianovskiy_VKR_ADAS_defense_final.pptx");
 const QA_DIR = path.join(ROOT, "work", "presentation_qa");
 
 const metrics = JSON.parse(await fs.readFile(path.join(ROOT, "results", "metrics.json"), "utf8"));
@@ -283,7 +283,7 @@ for (let i = 1; i <= 10; i++) {
   addArrowText(slide, 959, 195);
   addBox(slide, "5\nresults / figures\nJSON, PNG, CSV", 1002, 155, 180, 110, "#fef2f2", "#dc2626", 19);
   addBox(slide, "Документы\nВКР, приложение, презентация\nберут числа из results/metrics.json", 125, 360, 305, 118, "#f8fafc", "#64748b", 20);
-  addBox(slide, "Проверки\nstyle, consistency, pytest\nотдельно фиксируют результат", 485, 360, 305, 118, "#ecfeff", "#0891b2", 20);
+  addBox(slide, "Контроль качества\nметрики, графики, pytest\nподтверждают результат", 485, 360, 305, 118, "#ecfeff", "#0891b2", 20);
   addBox(slide, "Граница эксперимента\nтекущая модель scenario-level\nraw sensor pipeline вынесен дальше", 845, 360, 305, 118, "#fff7ed", "#ea580c", 20);
   addText(slide, "Архитектура оставляет проверяемый след: от исходной разметки до финальных PDF и графиков.", 125, 548, 980, 42, { fontSize: 22, color: "#334155", alignment: "center" });
   addFooter(slide, 6);
@@ -368,7 +368,7 @@ for (const [index, slide] of deck.slides.items.entries()) {
 }
 await writeBlob(path.join(QA_DIR, "montage.webp"), await deck.export({ format: "webp", montage: true, scale: 1 }));
 
-await fs.mkdir(SUBMISSION, { recursive: true });
+await fs.mkdir(FINAL, { recursive: true });
 const pptx = await PresentationFile.exportPptx(deck);
 await pptx.save(OUT);
 console.log(`Saved: ${OUT}`);

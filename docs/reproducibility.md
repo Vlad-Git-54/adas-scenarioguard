@@ -27,6 +27,7 @@ python scripts/train.py
 python scripts/evaluate.py
 python scripts/make_figures.py
 python scripts/make_diagrams.py
+python scripts/export_report_assets.py
 python scripts/export_results.py
 python scripts/build_documents.py
 node scripts/build_presentation.mjs
@@ -41,10 +42,10 @@ python -m pytest -q
 - `results/confusion_matrix.csv` - матрица ошибок
 - `results/error_cases.csv` - ошибки test split
 - `figures/` - графики и схемы
-- `submission/Marianovskiy_VKR_ADAS_final_submission.docx` / `.pdf` - финальный текст ВКР
-- `submission/Marianovskiy_VKR_ADAS_defense_final_submission.pptx` / `.pdf` - презентация защиты
-- `submission/Marianovskiy_zadanie_na_VKR_final_submission.docx` / `.pdf` - задание на ВКР
-- `submission/Marianovskiy_competency_index_final_submission.docx` / `.pdf` - предметный указатель компетенций
+- `final/Marianovskiy_VKR_ADAS_final.docx` / `.pdf` - финальный текст ВКР
+- `final/Marianovskiy_VKR_ADAS_defense_final.pptx` / `.pdf` - финальная презентация
+- `final/Marianovskiy_zadanie_na_VKR_final.docx` / `.pdf` - задание на ВКР
+- `final/Marianovskiy_competency_index_final.docx` / `.pdf` - предметный указатель компетенций
 
 ## Контрольные значения primary model
 

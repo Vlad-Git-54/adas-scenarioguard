@@ -12,7 +12,6 @@ import csv
 import json
 import math
 import random
-import time
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Sequence, Tuple
@@ -478,15 +477,11 @@ def evaluate_named_model(
 ) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     eval_rows = load_rows_by_split(rows, split)
     x, y, ids = matrix_from_rows(eval_rows, model_spec["feature_names"])
-    start = time.perf_counter()
     scores = predict_proba(model_spec["model"], x)
-    elapsed = time.perf_counter() - start
     y_int = [int(v) for v in y]
     score_list = [float(v) for v in scores]
     metrics = metrics_from_scores(y_int, score_list, float(model_spec["threshold"]))
     metrics["num_examples"] = len(eval_rows)
-    metrics["avg_ms_per_scene"] = round(safe_div(elapsed * 1000.0, len(eval_rows)), 5)
-    metrics["fps_json_pipeline"] = round(safe_div(len(eval_rows), elapsed), 1)
     predictions = []
     for row, scene_id, true_value, score in zip(eval_rows, ids, y_int, score_list):
         pred = int(score >= float(model_spec["threshold"]))

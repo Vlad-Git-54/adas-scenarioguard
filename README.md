@@ -34,13 +34,14 @@ python scripts/train.py
 python scripts/evaluate.py
 python scripts/make_figures.py
 python scripts/make_diagrams.py
+python scripts/export_report_assets.py
 python scripts/export_results.py
 python scripts/build_documents.py
 node scripts/build_presentation.mjs
 python -m pytest -q
 ```
 
-После запуска формируются таблицы в `data/processed/`, метрики и ошибки в `results/`, графики в `figures/`, а финальный комплект для сдачи в `submission/`.
+После запуска формируются таблицы в `data/processed/`, метрики и ошибки в `results/`, графики в `figures/`, а финальный комплект для сдачи в `final/`.
 
 ## Модель и метрики
 
@@ -71,10 +72,10 @@ scripts/                  подготовка данных, обучение, �
 data/processed/           подготовленная таблица KITTI и split
 data/samples/             небольшие JSON-примеры для CLI
 results/                  метрики, predictions, error cases, summaries
-figures/                  графики и диаграммы для отчета и защиты
-docs/                     воспроизводимость, ограничения, анализ ошибок, вопросы к защите
+figures/                  графики и диаграммы для отчета и презентации
+docs/                     воспроизводимость, ограничения, анализ ошибок, вопросы к докладу
 tests/                    unit-тесты
-submission/               финальные файлы для сдачи
+final/                    финальные файлы для сдачи
 ```
 
 ## Ограничения
@@ -87,16 +88,16 @@ submission/               финальные файлы для сдачи
 
 ## Финальные материалы
 
-Файлы для сдачи формируются в `submission/`:
+Файлы для сдачи формируются в `final/`:
 
-- `Marianovskiy_VKR_ADAS_final_submission.docx`
-- `Marianovskiy_VKR_ADAS_final_submission.pdf`
-- `Marianovskiy_zadanie_na_VKR_final_submission.docx`
-- `Marianovskiy_zadanie_na_VKR_final_submission.pdf`
-- `Marianovskiy_competency_index_final_submission.docx`
-- `Marianovskiy_competency_index_final_submission.pdf`
-- `Marianovskiy_VKR_ADAS_defense_final_submission.pptx`
-- `Marianovskiy_VKR_ADAS_defense_final_submission.pdf`
+- `Marianovskiy_VKR_ADAS_final.docx`
+- `Marianovskiy_VKR_ADAS_final.pdf`
+- `Marianovskiy_zadanie_na_VKR_final.docx`
+- `Marianovskiy_zadanie_na_VKR_final.pdf`
+- `Marianovskiy_competency_index_final.docx`
+- `Marianovskiy_competency_index_final.pdf`
+- `Marianovskiy_VKR_ADAS_defense_final.pptx`
+- `Marianovskiy_VKR_ADAS_defense_final.pdf`
 
 ## Лицензия
 

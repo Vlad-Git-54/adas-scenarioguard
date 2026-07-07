@@ -147,7 +147,18 @@ def predictions_error_table() -> None:
     predictions = load_json(RESULTS / "predictions.json")["proposed_reliability_logreg"]
     errors = [row for row in predictions if row["error_type"] in {"FP", "FN"}]
     with (RESULTS / "error_cases.csv").open("w", encoding="utf-8", newline="") as f:
-        fieldnames = ["scene_id", "error_type", "score", "min_distance_m", "vulnerable_count", "occluded_count", "truncated_count", "risk_prior"]
+        fieldnames = [
+            "scene_id",
+            "error_type",
+            "y_true",
+            "y_pred",
+            "score",
+            "min_distance_m",
+            "vulnerable_count",
+            "occluded_count",
+            "truncated_count",
+            "risk_prior",
+        ]
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         writer.writeheader()
         for row in errors:
