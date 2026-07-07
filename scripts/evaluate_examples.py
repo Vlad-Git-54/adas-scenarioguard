@@ -43,7 +43,7 @@ def main() -> int:
     avg_ms = safe_div(elapsed * 1000.0, len(rows))
 
     metrics = {
-        "note": "Metrics are calculated on 10 control JSON scenarios. This is an MVP check, not a full benchmark on nuScenes or DENSE.",
+        "note": "Demo counters are calculated on sample JSON scenarios. They illustrate CLI behavior and are separate from the KITTI experiment.",
         "num_examples": len(rows),
         "tp": tp,
         "fp": fp,

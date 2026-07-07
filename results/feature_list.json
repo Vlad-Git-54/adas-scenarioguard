@@ -1,0 +1,135 @@
+{
+  "note": "Feature values are derived from real KITTI object annotations. They are not synthetic training data.",
+  "models": {
+    "baseline_kitti_logreg": [
+      {
+        "name": "object_count",
+        "description": "number of annotated objects in the scene"
+      },
+      {
+        "name": "min_distance_m",
+        "description": "minimum 3D distance to an annotated object"
+      },
+      {
+        "name": "front_object_count",
+        "description": "number of objects in the front corridor"
+      },
+      {
+        "name": "vulnerable_count",
+        "description": "number of pedestrians, cyclists and sitting persons"
+      },
+      {
+        "name": "close_object_count",
+        "description": "number of front objects within 25 m"
+      },
+      {
+        "name": "max_bbox_area_norm",
+        "description": "largest normalized 2D bounding box area"
+      }
+    ],
+    "proposed_reliability_logreg": [
+      {
+        "name": "object_count",
+        "description": "number of annotated objects in the scene"
+      },
+      {
+        "name": "min_distance_m",
+        "description": "minimum 3D distance to an annotated object"
+      },
+      {
+        "name": "front_object_count",
+        "description": "number of objects in the front corridor"
+      },
+      {
+        "name": "vulnerable_count",
+        "description": "number of pedestrians, cyclists and sitting persons"
+      },
+      {
+        "name": "close_object_count",
+        "description": "number of front objects within 25 m"
+      },
+      {
+        "name": "max_bbox_area_norm",
+        "description": "largest normalized 2D bounding box area"
+      },
+      {
+        "name": "occluded_count",
+        "description": "number of objects with occlusion level at least 2"
+      },
+      {
+        "name": "truncated_count",
+        "description": "number of objects with truncation at least 0.35"
+      },
+      {
+        "name": "mean_occlusion",
+        "description": "mean normalized occlusion level"
+      },
+      {
+        "name": "mean_truncation",
+        "description": "mean truncation value"
+      },
+      {
+        "name": "camera_quality_proxy",
+        "description": "proxy estimate of camera observation quality"
+      },
+      {
+        "name": "lidar_geometry_quality_proxy",
+        "description": "proxy estimate of 3D geometry quality"
+      },
+      {
+        "name": "uncertainty_proxy",
+        "description": "proxy uncertainty from camera and geometry quality"
+      },
+      {
+        "name": "risk_prior",
+        "description": "rule-based object risk prior"
+      },
+      {
+        "name": "max_abs_alpha",
+        "description": "maximum absolute KITTI alpha angle"
+      },
+      {
+        "name": "min_lateral_abs_m",
+        "description": "minimum absolute lateral distance"
+      }
+    ],
+    "ablation_without_3d_geometry": [
+      {
+        "name": "object_count",
+        "description": "number of annotated objects in the scene"
+      },
+      {
+        "name": "front_object_count",
+        "description": "number of objects in the front corridor"
+      },
+      {
+        "name": "vulnerable_count",
+        "description": "number of pedestrians, cyclists and sitting persons"
+      },
+      {
+        "name": "close_object_count",
+        "description": "number of front objects within 25 m"
+      },
+      {
+        "name": "occluded_count",
+        "description": "number of objects with occlusion level at least 2"
+      },
+      {
+        "name": "truncated_count",
+        "description": "number of objects with truncation at least 0.35"
+      },
+      {
+        "name": "camera_quality_proxy",
+        "description": "proxy estimate of camera observation quality"
+      },
+      {
+        "name": "uncertainty_proxy",
+        "description": "proxy uncertainty from camera and geometry quality"
+      },
+      {
+        "name": "max_bbox_area_norm",
+        "description": "largest normalized 2D bounding box area"
+      }
+    ]
+  }
+}
