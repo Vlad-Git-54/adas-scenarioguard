@@ -150,6 +150,7 @@ adas-scenarioguard/
 - `docs/error_analysis.md` - анализ ошибок
 - `docs/defense_qna.md` - ответы на вопросы защиты
 - `docs/teacher_review.md` - преподавательская проверка готовности
+- `docs/originality_report.md` - локальная проверка оригинальности и самоповторов
 - `results/run_summary.md` - краткая сводка последнего запуска
 
 ## Лицензия

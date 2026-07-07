@@ -12,7 +12,7 @@
 - `data/processed/kitti_scenarios.csv` как основной воспроизводимый набор.
 - `results/metrics.json` как источник чисел для ВКР и презентации.
 - `figures/*.png` как рисунки для ВКР и защиты.
-- `docs/reproducibility.md`, `docs/error_analysis.md`, `docs/defense_qna.md`, `docs/teacher_review.md` как вспомогательные материалы.
+- `docs/reproducibility.md`, `docs/error_analysis.md`, `docs/defense_qna.md`, `docs/teacher_review.md`, `docs/originality_report.md` как вспомогательные материалы.
 
 ## Что нужно переписать вручную только перед сдачей
 
