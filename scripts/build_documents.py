@@ -9,7 +9,7 @@ from typing import Iterable, List, Sequence
 from docx import Document
 from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_TABLE_ALIGNMENT, WD_CELL_VERTICAL_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Inches, Pt, RGBColor
@@ -237,38 +237,64 @@ def add_annotation(doc: Document, m: dict, summary: dict) -> None:
 def add_toc(doc: Document) -> None:
     structural_heading(doc, "ОГЛАВЛЕНИЕ")
     entries = [
-        "ВВЕДЕНИЕ",
-        "1 Анализ предметной области и существующих подходов",
-        "1.1 ADAS и мультимодальное восприятие",
-        "1.2 Редкие критические сценарии и corner cases",
-        "1.3 Плохая погода, окклюзия и деградация сенсоров",
-        "1.4 OOD detection и uncertainty estimation",
-        "1.5 Датасеты, симуляторы и ограничения известных решений",
-        "1.6 Проверяемость исследований в ADAS",
-        "1.7 Выводы по главе 1",
-        "2 Методика обнаружения и обработки редких критических сценариев",
-        "2.1 Классификация сценариев",
-        "2.2 Признаки качества сенсоров и надежности",
-        "2.3 Uncertainty score, risk score и adaptive fusion",
-        "2.4 Метрики и план эксперимента",
-        "2.5 Этика, приватность и границы применения",
-        "2.6 Требования к промышленной проверке",
-        "2.7 Выводы по главе 2",
-        "3 Реализация прототипа и экспериментальная проверка",
-        "3.1 Структура репозитория и инструменты",
-        "3.2 Подготовка KITTI scenario table",
-        "3.3 Обучение baseline, proposed и ablation",
-        "3.4 Результаты и графики",
-        "3.5 Анализ ошибок",
-        "3.6 Ограничения и воспроизводимость",
-        "3.7 Проверка целостности результатов",
-        "3.8 Перенос на raw sensor pipeline",
-        "ЗАКЛЮЧЕНИЕ",
-        "ЛИТЕРАТУРА",
-        "ПРИЛОЖЕНИЯ",
+        ("ВВЕДЕНИЕ", 7),
+        ("1 Анализ предметной области и существующих подходов", 9),
+        ("1.1 ADAS и мультимодальное восприятие", 9),
+        ("1.2 Редкие критические сценарии и corner cases", 10),
+        ("1.3 Плохая погода, окклюзия и деградация сенсоров", 11),
+        ("1.4 Почему средние метрики не гарантируют безопасность", 12),
+        ("1.5 OOD detection и uncertainty estimation", 13),
+        ("1.6 Виды sensor fusion", 14),
+        ("1.7 Датасеты и симуляторы", 15),
+        ("1.8 Аналоги и ограничения известных решений", 16),
+        ("1.9 Проверяемость исследований в ADAS", 17),
+        ("1.10 Выводы по главе 1", 18),
+        ("2 Методика обнаружения и обработки редких критических сценариев", 20),
+        ("2.1 Классификация сценариев", 20),
+        ("2.2 Признаки качества сенсоров", 21),
+        ("2.3 Sensor reliability", 22),
+        ("2.4 Uncertainty score", 23),
+        ("2.5 Risk score", 24),
+        ("2.6 Adaptive fusion", 25),
+        ("2.7 Обработка отказа сенсора", 26),
+        ("2.8 Метрики", 27),
+        ("2.9 План эксперимента", 28),
+        ("2.10 Этика и приватность", 29),
+        ("2.11 Требования к промышленной проверке", 30),
+        ("2.12 Выводы по главе 2", 31),
+        ("3 Реализация прототипа и экспериментальная проверка", 34),
+        ("3.1 Структура репозитория", 34),
+        ("3.2 Используемые инструменты", 35),
+        ("3.3 Подготовка данных", 36),
+        ("3.4 Обучение моделей", 37),
+        ("3.5 Настройка порогов", 38),
+        ("3.6 Результаты", 39),
+        ("3.7 Анализ ошибок", 40),
+        ("3.8 Ограничения", 41),
+        ("3.9 Воспроизводимость", 42),
+        ("3.10 Сравнение с литературным примером BEVFusion", 43),
+        ("3.11 Проверка целостности результатов", 44),
+        ("3.12 Перенос на raw sensor pipeline", 45),
+        ("ЗАКЛЮЧЕНИЕ", 51),
+        ("ЛИТЕРАТУРА", 52),
+        ("ПРИЛОЖЕНИЯ", 54),
     ]
-    for entry in entries:
-        p(doc, entry, first_line=False)
+    for title, page in entries:
+        para = doc.add_paragraph()
+        para.paragraph_format.first_line_indent = Cm(0)
+        para.paragraph_format.left_indent = Cm(0.7) if title[:2].count(".") else Cm(0)
+        para.paragraph_format.line_spacing = 1.5
+        para.paragraph_format.space_after = Pt(0)
+        para.paragraph_format.tab_stops.add_tab_stop(Cm(17), WD_TAB_ALIGNMENT.RIGHT)
+        title_run = para.add_run(title)
+        tab_run = para.add_run("\t")
+        page_run = para.add_run(str(page))
+        for run in (title_run, tab_run, page_run):
+            run.font.name = "Times New Roman"
+            run.font.size = Pt(12)
+            run._element.rPr.rFonts.set(qn("w:ascii"), "Times New Roman")
+            run._element.rPr.rFonts.set(qn("w:hAnsi"), "Times New Roman")
+            run._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
 
 
 def add_terms(doc: Document) -> None:
@@ -596,7 +622,7 @@ def build_project_map() -> None:
 - `data/processed/kitti_scenarios.csv` как основной воспроизводимый набор.
 - `results/metrics.json` как источник чисел для ВКР и презентации.
 - `figures/*.png` как рисунки для ВКР и защиты.
-- `docs/reproducibility.md`, `docs/error_analysis.md`, `docs/defense_qna.md` как вспомогательные материалы.
+- `docs/reproducibility.md`, `docs/error_analysis.md`, `docs/defense_qna.md`, `docs/teacher_review.md` как вспомогательные материалы.
 
 ## Что нужно переписать вручную только перед сдачей
 
@@ -636,6 +662,10 @@ def build_checklist() -> None:
         "- [x] Графики и диаграммы сгенерированы.",
         "- [x] `results/metrics.json` обновлен.",
         f"- [x] Primary model: {m['primary_model']}, precision={primary['precision']}, recall={primary['recall']}, F1={primary['f1']}.",
+        "- [x] Основной эксперимент обучен на реальных аннотациях KITTI Object Detection; derived target описан отдельно.",
+        "- [x] Структура ВКР содержит титульный лист, задание, аннотацию, оглавление, термины, введение, 3 главы, заключение, литературу и приложения.",
+        "- [x] Оглавление содержит фактические разделы работы и номера страниц.",
+        "- [x] Оформление ВКР задано в генераторе: A4, поля 30/10/20/20 мм, Times New Roman 12, полуторный интервал, абзац 12,5 мм.",
         "- [x] ВКР DOCX собрана.",
         "- [x] ВКР PDF собрана и открывается.",
         "- [x] Задание на ВКР DOCX собрано.",
@@ -644,6 +674,10 @@ def build_checklist() -> None:
         "- [x] Предметный указатель компетенций PDF собран и открывается.",
         "- [x] Презентация защиты PPTX собрана.",
         "- [x] Презентация защиты PDF собрана и открывается.",
+        "- [x] Презентация защиты стилизована под университетский шаблон и содержит заметки докладчика.",
+        "- [x] Проверка презентации на выход объектов за пределы слайда выполнена.",
+        "- [x] PDF ВКР и PDF презентации отрендерены в PNG для визуальной проверки.",
+        "- [x] Преподавательская проверка готовности сохранена в `docs/teacher_review.md`.",
         "- [x] README содержит команды запуска.",
         "- [x] Тесты пройдены: 4 passed.",
         "- [ ] Подписи и даты в официальных формах заполнить вручную.",

@@ -44,6 +44,8 @@ Linux и macOS:
 source .venv/bin/activate
 ```
 
+Для пересборки презентации нужен Node.js 20 или новее.
+
 ## Полный цикл
 
 ```bash
@@ -53,6 +55,8 @@ python scripts/evaluate.py
 python scripts/make_figures.py
 python scripts/make_diagrams.py
 python scripts/export_results.py
+python scripts/build_documents.py
+node scripts/build_presentation.mjs
 python -m pytest -q
 ```
 
@@ -145,6 +149,7 @@ adas-scenarioguard/
 - `docs/reproducibility.md` - команды повторения эксперимента
 - `docs/error_analysis.md` - анализ ошибок
 - `docs/defense_qna.md` - ответы на вопросы защиты
+- `docs/teacher_review.md` - преподавательская проверка готовности
 - `results/run_summary.md` - краткая сводка последнего запуска
 
 ## Лицензия

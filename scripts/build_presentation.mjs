@@ -12,6 +12,11 @@ const metrics = JSON.parse(await fs.readFile(path.join(ROOT, "results", "metrics
 const summary = JSON.parse(await fs.readFile(path.join(ROOT, "data", "processed", "dataset_summary.json"), "utf8"));
 const primary = metrics.models[metrics.primary_model];
 
+const TGU_BLUE = "#2730b6";
+const TGU_BLUE_DARK = "#171d72";
+const TGU_BLUE_SOFT = "#eef2ff";
+const TGU_ACCENT = "#36d2cf";
+
 async function imageBytes(relPath) {
   const bytes = await fs.readFile(path.join(ROOT, relPath));
   return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
@@ -51,25 +56,92 @@ function addBox(slide, text, x, y, w, h, fill = "#f8fafc", line = "#cbd5e1", fon
   return rect;
 }
 
+function addBrandMark(slide, text, x, y, w, h, inverse = false) {
+  const mark = slide.shapes.add({
+    geometry: "roundRect",
+    position: { left: x, top: y, width: w, height: h },
+    fill: inverse ? "none" : TGU_BLUE,
+    line: { style: "solid", fill: inverse ? "#ffffff" : TGU_BLUE, width: 2 },
+    borderRadius: 6,
+  });
+  mark.text = text;
+  mark.text.style = {
+    fontSize: 15,
+    bold: true,
+    color: "#ffffff",
+    alignment: "center",
+  };
+}
+
+function addCoverChrome(slide) {
+  slide.shapes.add({
+    geometry: "roundRect",
+    position: { left: 32, top: 24, width: 1216, height: 648 },
+    fill: TGU_BLUE,
+    line: { style: "solid", fill: TGU_BLUE, width: 0 },
+    borderRadius: 28,
+  });
+  slide.shapes.add({
+    geometry: "roundRect",
+    position: { left: 910, top: 130, width: 210, height: 250 },
+    fill: "#3f49d4",
+    line: { style: "solid", fill: "#4f58df", width: 1 },
+    borderRadius: 18,
+  });
+  slide.shapes.add({
+    geometry: "roundRect",
+    position: { left: 955, top: 222, width: 122, height: 92 },
+    fill: "#f8fafc",
+    line: { style: "solid", fill: "#f8fafc", width: 0 },
+    borderRadius: 22,
+  });
+  addBrandMark(slide, "ТГУ", 82, 42, 92, 58, true);
+  addText(slide, "Томский\nгосударственный\nуниверситет", 184, 45, 190, 58, {
+    fontSize: 13,
+    bold: true,
+    color: "#ffffff",
+  });
+  addBrandMark(slide, "IDO", 408, 42, 92, 58, true);
+}
+
+function addSlideChrome(slide, n) {
+  slide.shapes.add({
+    geometry: "rect",
+    position: { left: 0, top: 0, width: 1280, height: 18 },
+    fill: TGU_BLUE,
+    line: { style: "solid", fill: TGU_BLUE, width: 0 },
+  });
+  slide.shapes.add({
+    geometry: "rect",
+    position: { left: 0, top: 0, width: 18, height: 720 },
+    fill: TGU_BLUE,
+    line: { style: "solid", fill: TGU_BLUE, width: 0 },
+  });
+  addText(slide, "НИ ТГУ · ИДО", 1030, 42, 150, 24, { fontSize: 13, bold: true, color: TGU_BLUE });
+  addText(slide, String(n), 1195, 42, 38, 24, { fontSize: 13, color: TGU_BLUE, alignment: "right" });
+}
+
 function addTitle(slide, title, subtitle = "") {
   addText(slide, title, 60, 42, 980, 58, { fontSize: 35, bold: true, color: "#0f172a" });
   slide.shapes.add({
     geometry: "rect",
     position: { left: 60, top: 104, width: 640, height: 3 },
-    fill: "#0f766e",
-    line: { style: "solid", fill: "#0f766e", width: 0 },
+    fill: TGU_ACCENT,
+    line: { style: "solid", fill: TGU_ACCENT, width: 0 },
   });
   if (subtitle) addText(slide, subtitle, 60, 114, 1040, 34, { fontSize: 18, color: "#475569" });
 }
 
 function addFooter(slide, n) {
-  addText(slide, "ADAS ScenarioGuard · ВКР · 2026", 60, 680, 420, 24, { fontSize: 13, color: "#64748b" });
-  addText(slide, String(n), 1180, 680, 40, 24, { fontSize: 13, color: "#64748b", alignment: "right" });
+  const cover = n === 1;
+  const color = cover ? "#dbeafe" : TGU_BLUE;
+  addText(slide, "ADAS ScenarioGuard · ВКР · 2026", 60, 680, 420, 24, { fontSize: 13, color });
+  addText(slide, String(n), 1180, 680, 40, 24, { fontSize: 13, color, alignment: "right" });
 }
 
 function addBulletList(slide, items, x, y, w, lineHeight = 42, fontSize = 22) {
   items.forEach((item, index) => {
-    addText(slide, "•", x, y + index * lineHeight, 24, 30, { fontSize, color: "#0f766e", bold: true });
+    addText(slide, "•", x, y + index * lineHeight, 24, 30, { fontSize, color: TGU_BLUE, bold: true });
     addText(slide, item, x + 32, y + index * lineHeight, w - 32, 36, { fontSize, color: "#1f2937" });
   });
 }
@@ -94,14 +166,19 @@ const deck = Presentation.create({ slideSize: { width: 1280, height: 720 } });
 for (let i = 1; i <= 10; i++) {
   const slide = deck.slides.add();
   slide.background.fill = "#ffffff";
+  if (i === 1) {
+    addCoverChrome(slide);
+  } else {
+    addSlideChrome(slide, i);
+  }
 }
 
 {
   const slide = deck.slides.items[0];
-  addText(slide, "Разработка методов обнаружения и обработки редких и критических сценариев в мультимодальном восприятии систем ADAS", 70, 86, 1060, 150, { fontSize: 34, bold: true, color: "#0f172a" });
-  addText(slide, "для повышения безопасности в сложных погодных и дорожных условиях", 70, 242, 920, 42, { fontSize: 24, color: "#334155" });
-  addBox(slide, "Марьяновский Владислав Андреевич\nГруппа 292405-1\n09.04.03 Прикладная информатика", 70, 380, 520, 132, "#f8fafc", "#94a3b8", 21);
-  addBox(slide, "НИ ТГУ · Институт дистанционного образования\nПрофиль: компьютерное зрение и нейронные сети\nТомск · 2026", 650, 380, 520, 132, "#ecfeff", "#0f766e", 21);
+  addText(slide, "Разработка методов обнаружения и обработки редких и критических сценариев в мультимодальном восприятии систем ADAS", 76, 158, 770, 150, { fontSize: 34, bold: true, color: "#ffffff" });
+  addText(slide, "для повышения безопасности в сложных погодных и дорожных условиях", 76, 322, 760, 42, { fontSize: 24, color: "#dbeafe" });
+  addBox(slide, "Марьяновский Владислав Андреевич\nГруппа 292405-1\n09.04.03 Прикладная информатика", 76, 430, 500, 128, "#ffffff", "#ffffff", 21);
+  addBox(slide, "НИ ТГУ · Институт дистанционного образования\nПрофиль: компьютерное зрение и нейронные сети\nТомск · 2026", 630, 430, 520, 128, TGU_BLUE_SOFT, "#ffffff", 21);
   addFooter(slide, 1);
   notes(slide, [
     "Начать с границы темы: работа не про полный автопилот, а про слой надежности восприятия ADAS.",
@@ -179,7 +256,7 @@ for (let i = 1; i <= 10; i++) {
 
 {
   const slide = deck.slides.items[5];
-  addTitle(slide, "Архитектура разделяет данные, обучение, оценку и артефакты");
+  addTitle(slide, "Архитектура разделяет данные, обучение и оценку");
   await addImage(slide, "figures/component_diagram.png", 70, 145, 560, 390, "Component diagram");
   await addImage(slide, "figures/deployment_diagram.png", 660, 145, 560, 390, "Deployment diagram");
   addText(slide, "GPU RX7700XT указан как ресурс для будущего raw-sensor обучения. Текущий KITTI scenario-level эксперимент выполняется на CPU.", 150, 575, 980, 48, { fontSize: 20, color: "#334155", alignment: "center" });
@@ -205,7 +282,7 @@ for (let i = 1; i <= 10; i++) {
   addFooter(slide, 7);
   notes(slide, [
     "Честно проговорить, что целевая метка derived, потому что KITTI не размечает ADAS criticality.",
-    "Это реальная разметка дорожных сцен, а не синтетические вручную заданные числа.",
+    "Это реальные аннотации дорожных сцен KITTI; целевая метка получена фиксированным правилом из наблюдаемых признаков.",
   ]);
 }
 
@@ -224,7 +301,7 @@ for (let i = 1; i <= 10; i++) {
 
 {
   const slide = deck.slides.items[8];
-  addTitle(slide, "Ошибки связаны с близкими и частично видимыми объектами");
+  addTitle(slide, "Близкие и частично видимые объекты объясняют ошибки");
   await addImage(slide, "figures/error_by_condition.png", 70, 145, 540, 360, "Error by condition");
   await addImage(slide, "figures/sensor_ablation.png", 660, 145, 520, 360, "Sensor ablation");
   addBulletList(slide, [

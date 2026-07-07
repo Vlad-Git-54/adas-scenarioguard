@@ -20,8 +20,8 @@
       "pr_auc": 0.961,
       "threshold": 0.38,
       "num_examples": 1497,
-      "avg_ms_per_scene": 0.00018,
-      "fps_json_pipeline": 5408236.8
+      "avg_ms_per_scene": 0.00017,
+      "fps_json_pipeline": 5907654.3
     },
     "proposed_reliability_logreg": {
       "tp": 509,
@@ -38,8 +38,8 @@
       "pr_auc": 0.97,
       "threshold": 0.35,
       "num_examples": 1497,
-      "avg_ms_per_scene": 0.00016,
-      "fps_json_pipeline": 6359390.2
+      "avg_ms_per_scene": 0.0002,
+      "fps_json_pipeline": 5095302.5
     },
     "ablation_without_3d_geometry": {
       "tp": 472,
@@ -56,8 +56,8 @@
       "pr_auc": 0.943,
       "threshold": 0.43,
       "num_examples": 1497,
-      "avg_ms_per_scene": 9e-05,
-      "fps_json_pipeline": 11097110.7
+      "avg_ms_per_scene": 0.00015,
+      "fps_json_pipeline": 6522875.8
     }
   },
   "grouped_metrics": {
