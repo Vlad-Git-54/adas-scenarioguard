@@ -34,14 +34,19 @@ python scripts/train.py
 python scripts/evaluate.py
 python scripts/make_figures.py
 python scripts/make_diagrams.py
-python scripts/export_report_assets.py
 python scripts/export_results.py
-python scripts/build_documents.py
-node scripts/build_presentation.mjs
 python -m pytest -q
 ```
 
 После запуска формируются таблицы в `data/processed/`, метрики и ошибки в `results/`, графики в `figures/`, а финальный комплект для сдачи в `final/`.
+
+JSON-сцены в `data/samples/` оставлены как небольшая CLI-демонстрация:
+
+```bash
+python -m adas_scenarioguard.cli data/samples/scene_002_fog_pedestrian.json --pretty
+```
+
+Эта демонстрация не используется для обучения модели и не входит в расчет итоговых метрик ВКР.
 
 ## Модель и метрики
 

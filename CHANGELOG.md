@@ -9,10 +9,10 @@
 - Добавлены метрики precision, recall, F1, accuracy, FNR, FPR, ROC AUC, PR AUC, FPS и матрица ошибок.
 - Добавлены графики confusion matrix, ROC, Precision-Recall, сравнение моделей, анализ условий, ablation и литературный пример BEVFusion.
 - Добавлены pipeline, use case, component и deployment diagrams.
-- Добавлены документы `docs/reproducibility.md`, `docs/error_analysis.md` и `docs/defense_qna.md`.
+- Добавлены документы `docs/reproducibility.md`, `docs/error_analysis.md` и `docs/defense_qna_final.md`.
 - Обновлены README, структура проекта и тесты.
 
-## v0.1.0 - Initial MVP
+## v0.1.0 - Initial JSON demo
 
 - Добавлен CLI для анализа JSON-сцен.
 - Реализовано простое объединение оценок camera, LiDAR и radar.

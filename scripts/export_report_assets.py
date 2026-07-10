@@ -151,7 +151,7 @@ def write_run_summary(metrics: dict, summary: dict) -> None:
         f"F1: {primary['f1']}",
         f"Accuracy: {primary['accuracy']}",
         f"ROC AUC: {primary['roc_auc']}",
-        f"PR AUC: {primary['pr_auc']}",
+        f"PR AUC: {primary['pr_auc']:.3f}",
         f"Confusion matrix: TP={primary['tp']}, FP={primary['fp']}, FN={primary['fn']}, TN={primary['tn']}",
         "",
         "The target label is derived from real KITTI object annotations by a fixed rule. It is not an original KITTI benchmark target.",

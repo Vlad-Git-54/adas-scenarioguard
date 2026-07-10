@@ -16,7 +16,7 @@ Recall: 0.937
 F1: 0.911
 Accuracy: 0.933
 ROC AUC: 0.981
-PR AUC: 0.97
+PR AUC: 0.970
 Confusion matrix: TP=509, FP=66, FN=34, TN=888
 
 The target label is derived from real KITTI object annotations by a fixed rule. It is not an original KITTI benchmark target.

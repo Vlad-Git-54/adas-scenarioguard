@@ -133,7 +133,7 @@ def main() -> int:
         f"F1: {primary_metrics['f1']}",
         f"Accuracy: {primary_metrics['accuracy']}",
         f"ROC AUC: {primary_metrics['roc_auc']}",
-        f"PR AUC: {primary_metrics['pr_auc']}",
+        f"PR AUC: {primary_metrics['pr_auc']:.3f}",
         f"Confusion matrix: TP={primary_metrics['tp']}, FP={primary_metrics['fp']}, "
         f"FN={primary_metrics['fn']}, TN={primary_metrics['tn']}",
         "",

@@ -15,7 +15,7 @@ def load_scene(path: Path) -> Dict[str, Any]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="ADAS ScenarioGuard MVP")
+    parser = argparse.ArgumentParser(description="ADAS ScenarioGuard CLI demonstration")
     parser.add_argument("scene", type=Path, help="Path to input scene JSON")
     parser.add_argument("--output", type=Path, default=None, help="Optional output JSON path")
     parser.add_argument("--pretty", action="store_true", help="Print human-readable summary")

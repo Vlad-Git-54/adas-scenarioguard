@@ -56,13 +56,13 @@ def main() -> int:
         "avg_ms_per_scene": round(avg_ms, 4),
     }
 
-    with (result_dir / "metrics.json").open("w", encoding="utf-8") as f:
+    with (result_dir / "demo_metrics.json").open("w", encoding="utf-8") as f:
         json.dump(metrics, f, ensure_ascii=False, indent=2)
 
-    with (result_dir / "predictions.json").open("w", encoding="utf-8") as f:
+    with (result_dir / "demo_predictions.json").open("w", encoding="utf-8") as f:
         json.dump(rows, f, ensure_ascii=False, indent=2)
 
-    with (result_dir / "metrics.csv").open("w", encoding="utf-8", newline="") as f:
+    with (result_dir / "demo_metrics.csv").open("w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["metric", "value"])
         for key, value in metrics.items():
