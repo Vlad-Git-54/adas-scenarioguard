@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "adas-scenarioguard"
 version = "1.0.0"
-description = "MVP for critical scenario detection in multimodal ADAS perception"
+description = "Research prototype for critical scenario detection in multimodal ADAS perception"
 authors = [{ name = "Vladislav Marianovskiy" }]
 readme = "README.md"
 requires-python = ">=3.10"

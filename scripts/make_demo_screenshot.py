@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import textwrap
 
 try:
     from PIL import Image, ImageDraw, ImageFont
@@ -11,7 +12,10 @@ except ImportError as exc:
 ROOT = Path(__file__).resolve().parents[1]
 
 demo_text = (ROOT / "demo" / "cli_demo.txt").read_text(encoding="utf-8")
-lines = demo_text.splitlines()
+lines = []
+for raw_line in demo_text.splitlines():
+    wrapped = textwrap.wrap(raw_line, width=92, subsequent_indent="  ")
+    lines.extend(wrapped or [""])
 
 width = 1200
 line_height = 27
@@ -27,7 +31,7 @@ except Exception:
 
 # Header
 draw.rectangle((0, 0, width, 48), fill=(32, 38, 52))
-draw.text((24, 12), "ADAS ScenarioGuard MVP demo", font=title_font, fill=(255, 255, 255))
+draw.text((24, 12), "ADAS ScenarioGuard CLI demo", font=title_font, fill=(255, 255, 255))
 
 # Terminal area
 draw.rounded_rectangle((24, 72, width - 24, height - 24), radius=12, fill=(20, 24, 31))

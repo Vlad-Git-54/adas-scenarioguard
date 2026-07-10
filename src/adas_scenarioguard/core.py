@@ -1,6 +1,7 @@
-"""Core logic for ADAS ScenarioGuard MVP.
+"""Core logic for the ADAS ScenarioGuard JSON demonstration layer.
 
-The MVP works with simplified scene JSON files. It does not replace a real ADAS model.
+The demo works with simplified scene JSON files. It does not replace the KITTI
+scenario-level experiment used for the final model evaluation.
 It demonstrates the project logic: multimodal confidence fusion, uncertainty estimate,
 and critical scenario flagging.
 """
@@ -49,8 +50,8 @@ def clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:
 def _sensor_reliability(sensor: str, weather: str, visibility_m: float, occlusion: float) -> float:
     """Return reliability weight for a sensor in a given scene.
 
-    The constants are simple engineering assumptions for MVP. They are not claimed
-    as trained model parameters.
+    The constants are simple engineering assumptions for the CLI demo. They are
+    not claimed as trained model parameters.
     """
     visibility_factor = clamp(visibility_m / 80.0, 0.25, 1.0)
 

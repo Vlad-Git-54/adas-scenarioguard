@@ -5,7 +5,7 @@
 ## Окружение
 
 - Python: 3.10 или новее
-- Node.js: 20 или новее для сборки презентации
+- Node.js: 20 или новее для вспомогательных графических скриптов
 - ОС проверки: Windows
 - Вычислительный контур: CPU-friendly табличная модель
 
@@ -26,10 +26,7 @@ python scripts/train.py
 python scripts/evaluate.py
 python scripts/make_figures.py
 python scripts/make_diagrams.py
-python scripts/export_report_assets.py
 python scripts/export_results.py
-python scripts/build_documents.py
-node scripts/build_presentation.mjs
 python -m pytest -q
 ```
 
@@ -55,7 +52,7 @@ python -m pytest -q
 - F1: 0.911
 - Accuracy: 0.933
 - ROC AUC: 0.981
-- PR AUC: 0.97
+- PR AUC: 0.970
 - TP/FP/FN/TN: 509/66/34/888
 
 ## Проверка на Windows
